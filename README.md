@@ -1,7 +1,8 @@
 # kapoorlab
 Hi, this is Dr. rer. nat. Varun Kapoor. Welcome to my Github of open source codes. Take whatever you fancy.
 
-[![Varun's GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&organization=Kapoorlabs-paris&organization=Kapoorlabs-CAPED&count_private=true&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+![Varun's GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&hide=jupyter%20notebook)
 
 # Contributor Covenant Code of Conduct
 
