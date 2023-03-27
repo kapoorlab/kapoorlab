@@ -10,6 +10,6 @@
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/varun-kapoor-6734b982/
 
-My Organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge)
+My Organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED),[KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge)
 
 Our Code of Conduct [Contributor Convenant](https://kapoorlabs.org/codeofconduct/)
