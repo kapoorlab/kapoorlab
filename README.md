@@ -1,8 +1,6 @@
 # kapoorlab
 # Hello! :wave: this is Dr. rer. nat. Varun Kapoor. 
 
-![Varun's GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&hide=jupyter%20notebook&include_orgs=true)
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [My website](https://kapoorlabs.org)
