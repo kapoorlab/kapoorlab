@@ -10,4 +10,4 @@
 
 My Organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge)
 
-Our Code of Conduct [Contributor Convenant](https://kapoorlabs.org/codeofconduct/)
+
