@@ -11,3 +11,4 @@
 My Organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge)
 
 
+[![GitHub Streak](https://streak-stats.demolab.com/?user=kapoorlab)](https://git.io/streak-stats)
