@@ -3,8 +3,10 @@
 
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
-[My website](https://kapoorlabs.org)
-[My PhD thesis](https://doi.org/10.18453/rosdok_id00001296)
+
+I am founder of a non-profit KapoorLabs aimed at supporting researchers by providing high quality research software, you can view our organization at [KapoorLabs](https://kapoorlabs.org)
+
+I did my PhD in theoretical physics from Uni Rostock, German you can read my [PhD thesis](https://doi.org/10.18453/rosdok_id00001296).
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/varun-kapoor-6734b982/
