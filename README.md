@@ -13,7 +13,7 @@ I did my PhD in theoretical physics from Uni Rostock, Germany specializing in in
 
 I code for several organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge). Some of the code is open source and public while other is private (as required by our paid collaborators). 
 
-If you came here looking for custom software development, making us a consultant on your imaging projects, custom derivation and solution of an issue requiring physics and mathematical support please use my email on the left to send a request detailing your requirements.
+If you came here looking for custom software development/ making us a consultant on your imaging projects or for custom derivation and solution of an issue requiring physics and mathematical support please use my email on the left to send a request detailing your requirements.
 
 
 [![GitHub Streak](https://streak-stats.demolab.com/?user=kapoorlab)](https://git.io/streak-stats)
