@@ -11,7 +11,7 @@ I did my PhD in theoretical physics from Uni Rostock, Germany specializing in in
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/varun-kapoor-6734b982/
 
-I code for several organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge). Some of the code us open source and public while some is private on request of our paid collaborators.
+I code for several organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED), [KietzmannLab](https://github.com/KietzmannLab), [KapoorLabs-Paris](https://github.com/Kapoorlabs-paris), [TrackMate](https://github.com/trackmate-sc), [conda-forge](https://github.com/conda-forge). Some of the code is open source and public while other is private (as required by our paid collaborators).
 
 
 [![GitHub Streak](https://streak-stats.demolab.com/?user=kapoorlab)](https://git.io/streak-stats)
