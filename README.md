@@ -4,6 +4,7 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [My website](https://kapoorlabs.org)
+[My PhD thesis](https://doi.org/10.18453/rosdok_id00001296)
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/varun-kapoor-6734b982/
