@@ -16,4 +16,3 @@ I code for several organizations: [caped-ai](https://github.com/Kapoorlabs-CAPED
 If you came here looking for custom software development/making us a consultant on your imaging projects or for custom derivation and solution of an issue requiring physics and mathematical support please use my email on the left to send a request detailing your requirements.
 
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=kapoorlab)](https://git.io/streak-stats)
