@@ -16,3 +16,10 @@ I code for several organizations: [KapoorLabs](https://github.com/Kapoorlabs-CAP
 If you came here looking for custom software development/making us a consultant on your imaging projects or for custom derivation and solution of an issue requiring physics and mathematical support please use my email on the left to send a request detailing your requirements.
 
 
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=kapoorlab)](https://github.com/ryo-ma/github-profile-trophy)
+
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+
+[![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&hide=issues,contribs&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
