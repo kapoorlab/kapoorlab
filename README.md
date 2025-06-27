@@ -22,4 +22,4 @@ If you came here looking for custom software development/making us a consultant 
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
-[![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&hide=issues,contribs&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+[![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
