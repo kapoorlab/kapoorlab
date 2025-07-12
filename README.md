@@ -20,7 +20,7 @@ If you came here looking for custom software development/making us a consultant 
 [![trophy](https://github-profile-trophy.vercel.app/?username=kapoorlab)](https://github.com/ryo-ma/github-profile-trophy)
 
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+
 
 ### 🔬 Selected Projects Across Organizations
 [![Kapoorlabs-CAPED Repo](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/Kaibu)
