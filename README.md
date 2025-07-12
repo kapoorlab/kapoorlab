@@ -24,10 +24,10 @@ If you came here looking for custom software development/making us a consultant 
 
 ### 🔬 Selected Projects Across Organizations
 
-![Kapoorlabs-CAPED Metrics](https://metrics.lecoq.io/Kapoorlabs-CAPED?template=classic&repositories=100&languages=1&activity=1&stars=1)
+![Kapoorlabs-CAPED Metrics](https://metrics.lecoq.io/Kapoorlabs-CAPED?template=classic&repositories=100)
 
 [![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
-![trackmate-sc Metrics](https://metrics.lecoq.io/trackmate-sc?template=classic&repositories=100&languages=1&activity=1&stars=1)
+![trackmate-sc Metrics](https://metrics.lecoq.io/trackmate-sc?template=classic&repositories=100)
 
 
