@@ -23,11 +23,13 @@ If you came here looking for custom software development/making us a consultant 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=kapoorlab&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
 ### 🔬 Selected Projects Across Organizations
+[![Kapoorlabs-CAPED Repo](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/Kaibu)
 
-![Kapoorlabs-CAPED Metrics](https://metrics.lecoq.io/Kapoorlabs-CAPED?template=classic&repositories=100)
+
+
+[![trackmate-sc Repo](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate)
+
 
 [![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
-
-![trackmate-sc Metrics](https://metrics.lecoq.io/trackmate-sc?template=classic&repositories=100)
 
 
