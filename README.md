@@ -21,11 +21,16 @@ If you came here looking for custom software development/making us a consultant 
 
 
 ### 🔬 Selected Projects Across Organizations
-[![Kapoorlabs-CAPED Repo](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/Kaibu)
+
+[![Segmentation Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=VollSeg)](https://github.com/Kapoorlabs-CAPED/VollSeg)
+
+
+[![Tracking Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/NapaTrackMater)
 
 
 
-[![trackmate-sc Repo](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate)
+
+[![Fiji based Tracking Solution](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate)
 
 
 
