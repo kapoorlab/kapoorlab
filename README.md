@@ -21,7 +21,7 @@ If you came here looking for custom software development/making us a consultant 
 
 ### 🔬 Segmentation, Action Classification and Tracking Software Packages
 
-| Package | Class / Purpose | GitHub |
+| Package | Purpose | Code |
 |---------|----------------|--------|
 | Complete Workflow package | Full workflow | [![Complete Workflow package](https://github-readme-stats.vercel.app/api/pin/?username=kapoorlab&repo=CopenhagenWorkflow)](https://github.com/kapoorlab/CopenhagenWorkflow) |
 | Segmentation Solutions | Segmentation | [![Segmentation Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=VollSeg)](https://github.com/Kapoorlabs-CAPED/VollSeg) |
