@@ -19,19 +19,13 @@ If you came here looking for custom software development/making us a consultant 
 
 
 
-
 ### 🔬 Segmentation, Action Classification and Tracking Software Packages
 
-[![Complete Workflow package](https://github-readme-stats.vercel.app/api/pin/?username=kapoorlab&repo=CopenhagenWorkflow)](https://github.com/kapoorlab/CopenhagenWorkflow)
-
-
-[![Segmentation Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=VollSeg)](https://github.com/Kapoorlabs-CAPED/VollSeg)
-
-[![Action Classification Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=caped-ai-oneat)](https://github.com/Kapoorlabs-CAPED/caped-ai-oneat)
-
-[![Tracking Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/NapaTrackMater)
-
-[![Fiji based Tracking Solution](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate)
-
-
+| Package | Class / Purpose | GitHub |
+|---------|----------------|--------|
+| Complete Workflow package | Full workflow | [![Complete Workflow package](https://github-readme-stats.vercel.app/api/pin/?username=kapoorlab&repo=CopenhagenWorkflow)](https://github.com/kapoorlab/CopenhagenWorkflow) |
+| Segmentation Solutions | Segmentation | [![Segmentation Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=VollSeg)](https://github.com/Kapoorlabs-CAPED/VollSeg) |
+| Action Classification Solutions | Action Classification | [![Action Classification Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=caped-ai-oneat)](https://github.com/Kapoorlabs-CAPED/caped-ai-oneat) |
+| Tracking Solutions | Tracking | [![Tracking Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/NapaTrackMater) |
+| Fiji-based Tracking Solution | Tracking (Fiji/ImageJ) | [![Fiji based Tracking Solution](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate) |
 
