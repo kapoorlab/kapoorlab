@@ -17,8 +17,6 @@ If you came here looking for custom software development/making us a consultant 
 
 
 
-[![trophy](https://github-profile-trophy.vercel.app/?username=kapoorlab)](https://github.com/ryo-ma/github-profile-trophy)
-
 
 
 
@@ -29,7 +27,5 @@ If you came here looking for custom software development/making us a consultant 
 
 [![trackmate-sc Repo](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate)
 
-
-[![kapoorlab' GitHub stats](https://github-readme-stats.vercel.app/api?username=kapoorlab&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
 
