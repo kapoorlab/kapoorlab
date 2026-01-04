@@ -4,7 +4,9 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/donate?business=varun.kapoor@kapoorlabs.org&currency_code=EUR)
-
+[![Entra](https://img.shields.io/badge/🤗%20HuggingFace-Entra-yellow)](https://huggingface.co/spaces/vkapoor/Entra)
+ [![Portfolio](https://img.shields.io/badge/🤗%20HuggingFace-Portfolio-blue)](https://huggingface.co/spaces/vkapoor/PortfolioAnalysisforEuropeans) 
+ 
 I am founder of a non-profit KapoorLabs aimed at supporting researchers by providing high quality research software, you can view our organization at [KapoorLabs](https://kapoorlabs.org).
 
 I did my PhD in theoretical physics at Uni Rostock, Germany specializing in intense laser-atom interactions, you can read my [PhD thesis](https://doi.org/10.18453/rosdok_id00001296).
