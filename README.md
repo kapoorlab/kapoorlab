@@ -29,3 +29,11 @@ If you came here looking for custom software development/making us a consultant 
 | Python and Napari based Tracking Solutions | Tracking | [![Tracking Solutions](https://github-readme-stats.vercel.app/api/pin/?username=Kapoorlabs-CAPED&repo=NapaTrackMater)](https://github.com/Kapoorlabs-CAPED/NapaTrackMater) |
 | Fiji-based Tracking Solution | Tracking (using TrackMate-Oneat) | [![Fiji based Tracking Solution](https://github-readme-stats.vercel.app/api/pin/?username=trackmate-sc&repo=TrackMate-Oneat)](https://github.com/trackmate-sc/TrackMate) |
 
+
+### 🤗 HuggingFace Spaces
+
+| Space | Description | Link |
+|-------|-------------|------|
+| 🐢 Entra | Image transformation using divergence-free tensor basis functions for microscopy data | [![Entra](https://img.shields.io/badge/🤗%20HuggingFace-Entra-yellow)](https://huggingface.co/spaces/vkapoor/Entra) |
+| 📊 Portfolio Analysis for Europeans | Portfolio tracker for Europeans investing in US & EU markets with real-time prices, Sharpe ratio analysis, and S&P 500 comparison | [![Portfolio](https://img.shields.io/badge/🤗%20HuggingFace-Portfolio-blue)](https://huggingface.co/spaces/vkapoor/PortfolioAnalysisforEuropeans) |
+
