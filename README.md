@@ -1,8 +1,9 @@
 # kapoorlab
-# Hello! :wave: this is Dr. rer. nat. Varun Kapoor. 
+# Hello! :wave: this is Dr. rer. nat. Varun Kapoor.
 
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/donate?business=varun.kapoor@kapoorlabs.org&currency_code=EUR)
 
 I am founder of a non-profit KapoorLabs aimed at supporting researchers by providing high quality research software, you can view our organization at [KapoorLabs](https://kapoorlabs.org).
 
