@@ -34,6 +34,6 @@ If you came here looking for custom software development/making us a consultant 
 
 | Space | Description | Link |
 |-------|-------------|------|
-| 🐢 Entra | Image transformation using divergence-free tensor basis functions for microscopy data | [![Entra](https://img.shields.io/badge/🤗%20HuggingFace-Entra-yellow)](https://huggingface.co/spaces/vkapoor/Entra) |
+| 🐢 Entra | Entropy conserving transformation using divergence free vector fields | [![Entra](https://img.shields.io/badge/🤗%20HuggingFace-Entra-yellow)](https://huggingface.co/spaces/vkapoor/Entra) |
 | 📊 Portfolio Analysis for Europeans | Portfolio tracker for Europeans investing in US & EU markets with real-time prices, Sharpe ratio analysis, and S&P 500 comparison | [![Portfolio](https://img.shields.io/badge/🤗%20HuggingFace-Portfolio-blue)](https://huggingface.co/spaces/vkapoor/PortfolioAnalysisforEuropeans) |
 
