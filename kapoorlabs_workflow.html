@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KapoorLabs Bioimage Workflow</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap');
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #03040C; --teal: #00C8D7; --teal2: #007A85;
+  --white: #EFF6FF; --dim: #1A2540;
+}
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+  cursor: crosshair;
+}
+#layout {
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  height: 100vh;
+}
+#canvas-wrap {
+  position: relative;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  cursor: pointer;
+}
+/* ── Click ripple ── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  pointer-events: none;
+  animation: rippleOut 0.6s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+@keyframes rippleOut {
+  from { width: 10px; height: 10px; opacity: .8; }
+  to   { width: 80px; height: 80px; opacity: 0; }
+}
+/* ── Panel ── */
+#panel {
+  background: linear-gradient(160deg, #080F22 0%, #03040C 100%);
+  border-left: 1px solid rgba(0,200,215,.15);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 22px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+#panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  opacity: .4;
+}
+.p-micro {
+  font-size: 9px; letter-spacing: .25em;
+  color: var(--teal2); font-family: 'DM Mono', monospace;
+  text-transform: uppercase; margin-bottom: 22px;
+}
+#step-badge {
+  font-size: 10px; letter-spacing: .2em;
+  color: var(--teal); font-family: 'DM Mono', monospace;
+  margin-bottom: 8px; opacity: .75;
+  min-height: 16px;
+}
+#step-title {
+  font-size: 19px; font-weight: 700;
+  line-height: 1.3; margin-bottom: 14px;
+  min-height: 52px;
+  white-space: pre-line;
+  transition: color 0.3s;
+}
+#step-desc {
+  font-size: 12.5px; line-height: 1.85;
+  color: rgba(239,246,255,.60);
+  font-family: 'DM Mono', monospace; font-weight: 300;
+  flex: 1; min-height: 80px;
+}
+#step-desc strong { color: var(--teal); font-weight: 400; }
+#step-tools {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid rgba(0,200,215,.10);
+  font-size: 9.5px; letter-spacing: .15em;
+  color: var(--teal2); font-family: 'DM Mono', monospace;
+  text-transform: uppercase; min-height: 20px;
+}
+/* Dots nav */
+#dots {
+  display: flex; gap: 7px; margin-top: 22px; flex-wrap: wrap;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--dim); border: 1px solid var(--teal2);
+  cursor: pointer; transition: background .25s, transform .2s;
+}
+.dot.active { background: var(--teal); transform: scale(1.5); }
+/* Hint */
+#hint {
+  margin-top: 18px; font-size: 9px; letter-spacing: .18em;
+  color: rgba(0,200,215,.45); font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  animation: blink 2.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:.4} 50%{opacity:.95} }
+/* Fade animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim { animation: fadeUp .35s ease forwards; }
+</style>
+</head>
+<body>
+<div id="layout">
+
+  <!-- LEFT: Canvas -->
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+  </div>
+
+  <!-- RIGHT: Info panel -->
+  <div id="panel">
+    <div class="p-micro">KapoorLabs · Bioimage Analysis Workflow</div>
+    <div id="step-badge">STEP — / 09</div>
+    <div id="step-title" style="color: var(--teal)">Click any step planet to explore the workflow</div>
+    <div id="step-desc">
+      The KapoorLabs pipeline transforms raw 3D microscopy volumes into
+      physics-based insights about developing biological systems.<br><br>
+      <strong>Click on the solar system</strong> — or use arrow keys — to
+      advance through the nine stages. Each planet is one step.
+    </div>
+    <div id="step-tools"></div>
+    <div id="dots"></div>
+    <div id="hint">↗ click canvas · ← → arrow keys · esc reset</div>
+  </div>
+
+</div>
+
+<script>
+// ─── Step data ────────────────────────────────────────────────────────────────
+var STEPS = [
+  { title: '3D Segmentation\nTraining Data',
+    short: '3D Seg.', badge: '01',
+    desc:  'Raw 3D microscopy volumes are annotated to produce ground-truth labels for nuclei, membranes, and specialised structures across multiple fluorescence channels.',
+    tools: 'Python · Napari · Fiji',
+    color: '#1565C0', glow: '#90CAF9' },
+
+  { title: '3D Deep Learning\nModels (HPC)',
+    short: 'HPC DL', badge: '02',
+    desc:  'Annotated data trains state-of-the-art 3D segmentation networks on in-house HPC:<br><strong>StarDist · CARE · U-Net · VollSeg · AutoEncoder · CellPose</strong>',
+    tools: 'Python · PyTorch-Lightning · HPC',
+    color: '#2E7D32', glow: '#A5D6A7' },
+
+  { title: 'Cell State Detection\n(ONEAT)',
+    short: 'ONEAT', badge: '03',
+    desc:  'Trained ONEAT models detect key biological events at single-cell resolution in 3D time-lapse volumes:<br><strong>Mitosis · Apoptosis · Necrosis</strong>',
+    tools: 'Python · Fiji · TrackMate',
+    color: '#6A1B9A', glow: '#CE93D8' },
+
+  { title: 'Lineage Tree\nCorrection',
+    short: 'Lineage', badge: '04',
+    desc:  'TrackMate tracking graphs are automatically corrected using spatial and temporal biology priors — eliminating false splits, merges, and missing links in cell lineage trees.',
+    tools: 'Python · Java · TrackMate',
+    color: '#BF360C', glow: '#FF8A65' },
+
+  { title: 'TrackMate XML\n→ DataFrame',
+    short: 'XML→DF', badge: '05',
+    desc:  'Corrected lineage trees are parsed from TrackMate XML into Pandas DataFrames containing per-cell <strong>shape</strong>, <strong>dynamics</strong>, <strong>point cloud features</strong>, and <strong>autoencoder latent coordinates</strong>.',
+    tools: 'Python · Pandas · Napari',
+    color: '#E65100', glow: '#FFCC80' },
+
+  { title: 'Cell Fate\nClassification',
+    short: 'Fate', badge: '06',
+    desc:  'Morphodynamic feature vectors are classified using a hierarchy of approaches:<br><strong>Unsupervised clustering · XGBoost · CNN-attention</strong> on morphodynamic information.',
+    tools: 'Python · scikit-learn · XGBoost',
+    color: '#006064', glow: '#80DEEA' },
+
+  { title: 'Inception-style\nModels',
+    short: 'Inception', badge: '07',
+    desc:  'Custom multi-scale inception architectures trained on imbalanced cell-fate datasets improve prediction accuracy even for <strong>rare-class biological events</strong>.',
+    tools: 'Python · PyTorch · Napari',
+    color: '#283593', glow: '#9FA8DA' },
+
+  { title: 'Non-equilibrium\nMechanics',
+    short: 'Non-eq.', badge: '08',
+    desc:  'Single-cell trajectories are analysed through the lens of non-equilibrium statistical physics — extracting entropy production, force inference, and topological signatures from living matter.',
+    tools: 'Python · NumPy · SciPy',
+    color: '#880E4F', glow: '#F48FB1', dashed: true },
+
+  { title: 'Custom Analyses\non Request',
+    short: 'Custom', badge: '09',
+    desc:  'Bespoke analysis modules built collaboratively on request:<br><strong>MSD analysis · Recoil velocity · Custom Napari plugins · Publication-quality figures</strong>',
+    tools: 'Python · Napari · GitHub',
+    color: '#33691E', glow: '#AED581' },
+];
+
+// ─── Canvas setup ─────────────────────────────────────────────────────────────
+var canv = document.getElementById('c');
+var ctx  = canv.getContext('2d');
+var wrap = document.getElementById('canvas-wrap');
+
+var W, H, CX, CY, R_TOOL, R_STEP, PR, SR;
+
+function resize() {
+  W = wrap.clientWidth;
+  H = wrap.clientHeight;
+  canv.width  = W;
+  canv.height = H;
+  CX = W / 2;
+  CY = H / 2;
+  var mn = Math.min(W, H);
+  R_TOOL = mn * 0.18;
+  R_STEP = mn * 0.34;
+  PR     = mn * 0.053;   // step planet radius
+  SR     = mn * 0.072;   // sun radius
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Stars
+var stars = [];
+for (var i = 0; i < 290; i++) {
+  stars.push({
+    x:  Math.random(),
+    y:  Math.random(),
+    r:  Math.random() * 1.4 + 0.3,
+    a:  Math.random() * 0.65 + 0.10,
+    ph: Math.random() * Math.PI * 2
+  });
+}
+
+// State
+var angle      = 0;
+var activeStep = -1;
+var t          = 0;
+var lastTs     = null;
+
+// ─── Panel DOM refs ───────────────────────────────────────────────────────────
+var elBadge = document.getElementById('step-badge');
+var elTitle = document.getElementById('step-title');
+var elDesc  = document.getElementById('step-desc');
+var elTools = document.getElementById('step-tools');
+var elDots  = document.getElementById('dots');
+
+// Build navigation dots
+STEPS.forEach(function(_, i) {
+  var d = document.createElement('div');
+  d.className = 'dot';
+  d.title = STEPS[i].title;
+  d.addEventListener('click', function(e) {
+    e.stopPropagation();
+    selectStep(i);
+  });
+  elDots.appendChild(d);
+});
+
+function selectStep(i) {
+  activeStep = i;
+  var s = STEPS[i];
+
+  // Update badge
+  elBadge.textContent = 'STEP ' + s.badge + ' / 09';
+
+  // Update title with color
+  elTitle.style.color = s.glow;
+  elTitle.textContent = s.title;
+
+  // Update description
+  elDesc.innerHTML = s.desc;
+
+  // Update tools line
+  elTools.textContent = '\u2699  ' + s.tools;
+
+  // Restart fade animation
+  elTitle.classList.remove('anim');
+  elDesc.classList.remove('anim');
+  void elTitle.offsetWidth; // force reflow
+  elTitle.classList.add('anim');
+  elDesc.classList.add('anim');
+
+  // Update dots
+  var dots = elDots.querySelectorAll('.dot');
+  dots.forEach(function(d, j) {
+    d.classList.toggle('active', j === i);
+  });
+}
+
+function advance() {
+  var next = activeStep < 0 ? 0 : (activeStep + 1) % STEPS.length;
+  selectStep(next);
+}
+
+function retreat() {
+  var prev = activeStep <= 0 ? STEPS.length - 1 : activeStep - 1;
+  selectStep(prev);
+}
+
+// ─── Click on canvas ─────────────────────────────────────────────────────────
+canv.addEventListener('click', function(e) {
+  // Show ripple
+  var r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = e.clientX + 'px';
+  r.style.top  = e.clientY + 'px';
+  document.body.appendChild(r);
+  setTimeout(function() { r.remove(); }, 700);
+
+  // Check if click is near a specific step planet
+  var rect     = canv.getBoundingClientRect();
+  var mx       = e.clientX - rect.left;
+  var my       = e.clientY - rect.top;
+  var hit      = -1;
+  var hitDist  = Infinity;
+
+  STEPS.forEach(function(s, i) {
+    var ang = (i / STEPS.length) * Math.PI * 2 + angle;
+    var px  = CX + R_STEP * Math.cos(ang);
+    var py  = CY + R_STEP * Math.sin(ang);
+    var dx  = mx - px;
+    var dy  = my - py;
+    var d   = Math.sqrt(dx * dx + dy * dy);
+    if (d < PR * 1.4 && d < hitDist) {
+      hitDist = d;
+      hit     = i;
+    }
+  });
+
+  if (hit >= 0) {
+    selectStep(hit);   // clicked a specific planet
+  } else {
+    advance();         // clicked elsewhere → advance
+  }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); advance(); }
+  if (e.key === 'ArrowLeft')                    { e.preventDefault(); retreat(); }
+  if (e.key === 'Escape')                       { activeStep = -1; }
+});
+
+// ─── Logo drawing functions ───────────────────────────────────────────────────
+function drawPython(x, y, r) {
+  var s = r * 0.65;
+  ctx.save(); ctx.translate(x, y);
+  // Blue snake (top-left P-shape)
+  ctx.fillStyle = '#3776AB';
+  ctx.beginPath();
+  ctx.arc(-s*0.18, -s*0.68, s*0.30, Math.PI, 0, false);
+  ctx.lineTo(s*0.12, -s*0.10);
+  ctx.arc(s*0.10, -s*0.10, s*0.20, 0, Math.PI*0.5, false);
+  ctx.lineTo(-s*0.48, s*0.10);
+  ctx.arc(-s*0.48, -s*0.28, s*0.40, Math.PI*0.5, Math.PI, false);
+  ctx.closePath(); ctx.fill();
+  // Blue eye
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(-s*0.18, -s*0.66, s*0.09, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#3776AB';
+  ctx.beginPath(); ctx.arc(-s*0.14, -s*0.66, s*0.045, 0, Math.PI*2); ctx.fill();
+  // Yellow snake (mirror)
+  ctx.fillStyle = '#FFD43B';
+  ctx.beginPath();
+  ctx.arc(s*0.18, s*0.68, s*0.30, 0, Math.PI, false);
+  ctx.lineTo(-s*0.12, s*0.10);
+  ctx.arc(-s*0.10, s*0.10, s*0.20, Math.PI, Math.PI*1.5, false);
+  ctx.lineTo(s*0.48, -s*0.10);
+  ctx.arc(s*0.48, s*0.28, s*0.40, Math.PI*1.5, 0, false);
+  ctx.closePath(); ctx.fill();
+  // Yellow eye
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(s*0.18, s*0.66, s*0.09, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#FFD43B';
+  ctx.beginPath(); ctx.arc(s*0.14, s*0.66, s*0.045, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawFiji(x, y, r) {
+  var s = r * 0.80;
+  ctx.save(); ctx.translate(x, y);
+  ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI*2); ctx.clip();
+  // Sky
+  var sky = ctx.createLinearGradient(0, -s, 0, s*0.3);
+  sky.addColorStop(0, '#1565C0'); sky.addColorStop(1, '#42A5F5');
+  ctx.fillStyle = sky; ctx.fillRect(-s, -s, s*2, s*2);
+  // Sun
+  ctx.fillStyle = '#FFD600';
+  ctx.beginPath(); ctx.arc(s*0.38, -s*0.42, s*0.20, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = '#FFEE58'; ctx.lineWidth = s*0.055; ctx.lineCap = 'round';
+  for (var i = 0; i < 8; i++) {
+    var a = i * Math.PI / 4;
+    ctx.beginPath();
+    ctx.moveTo(s*0.38 + Math.cos(a)*s*0.26, -s*0.42 + Math.sin(a)*s*0.26);
+    ctx.lineTo(s*0.38 + Math.cos(a)*s*0.37, -s*0.42 + Math.sin(a)*s*0.37);
+    ctx.stroke();
+  }
+  // Ocean
+  ctx.fillStyle = '#0277BD'; ctx.fillRect(-s, s*0.22, s*2, s*0.78);
+  // Island
+  ctx.fillStyle = '#2E7D32';
+  ctx.beginPath();
+  ctx.moveTo(-s*0.75, s*0.26);
+  ctx.bezierCurveTo(-s*0.4, -s*0.05, -s*0.1, -s*0.22, 0, -s*0.48);
+  ctx.bezierCurveTo(s*0.1, -s*0.22, s*0.2, -s*0.05, s*0.42, s*0.26);
+  ctx.closePath(); ctx.fill();
+  // Peak rock
+  ctx.fillStyle = '#6D4C41';
+  ctx.beginPath();
+  ctx.moveTo(-s*0.14, -s*0.26); ctx.lineTo(0, -s*0.50); ctx.lineTo(s*0.14, -s*0.26);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function drawNapari(x, y, r) {
+  var s = r * 0.78;
+  ctx.save(); ctx.translate(x, y);
+  ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI*2); ctx.clip();
+  ctx.fillStyle = '#1A0033'; ctx.fillRect(-s, -s, s*2, s*2);
+  // Isometric stacked layers
+  var layers = [
+    { col: '#FF6EC7', yo: s*0.42 },
+    { col: '#00E5FF', yo: s*0.16 },
+    { col: '#76FF03', yo: -s*0.10 },
+    { col: '#FFAB40', yo: -s*0.36 }
+  ];
+  var lw = s*1.3, lh = s*0.24, sk = s*0.32;
+  layers.forEach(function(l) {
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = l.col;
+    ctx.beginPath();
+    ctx.moveTo(-lw/2+sk, l.yo-lh/2); ctx.lineTo(lw/2+sk, l.yo-lh/2);
+    ctx.lineTo(lw/2-sk, l.yo+lh/2); ctx.lineTo(-lw/2-sk, l.yo+lh/2);
+    ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 0.28;
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = s*0.022;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  });
+  ctx.restore();
+}
+
+function drawJava(x, y, r) {
+  var s = r * 0.70;
+  ctx.save(); ctx.translate(x, y);
+  // Cup body
+  ctx.fillStyle = '#CC0000';
+  ctx.beginPath();
+  ctx.moveTo(-s*0.50, -s*0.18); ctx.lineTo(s*0.50, -s*0.18);
+  ctx.lineTo(s*0.40, s*0.60);   ctx.lineTo(-s*0.40, s*0.60);
+  ctx.closePath(); ctx.fill();
+  // Highlight
+  ctx.fillStyle = 'rgba(255,255,255,0.16)';
+  ctx.beginPath();
+  ctx.moveTo(-s*0.50, -s*0.18); ctx.lineTo(-s*0.16, -s*0.18);
+  ctx.lineTo(-s*0.22, s*0.60);  ctx.lineTo(-s*0.40, s*0.60);
+  ctx.closePath(); ctx.fill();
+  // Rim
+  ctx.fillStyle = '#B71C1C'; ctx.fillRect(-s*0.54, -s*0.26, s*1.08, s*0.11);
+  // Handle
+  ctx.strokeStyle = '#CC0000'; ctx.lineWidth = s*0.13;
+  ctx.lineCap = 'round'; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(s*0.60, s*0.18, s*0.25, -Math.PI*0.45, Math.PI*0.45);
+  ctx.stroke();
+  // Saucer
+  ctx.fillStyle = '#E53935';
+  ctx.beginPath(); ctx.ellipse(0, s*0.67, s*0.56, s*0.10, 0, 0, Math.PI*2); ctx.fill();
+  // Steam
+  ctx.strokeStyle = 'rgba(255,255,255,.72)'; ctx.lineWidth = s*0.065; ctx.lineCap = 'round';
+  [[-s*0.26, -s*0.60], [0, -s*0.54], [s*0.26, -s*0.60]].forEach(function(p) {
+    ctx.beginPath(); ctx.moveTo(p[0], p[1]);
+    ctx.bezierCurveTo(p[0]-s*0.09, p[1]-s*0.16, p[0]+s*0.09, p[1]-s*0.32, p[0], p[1]-s*0.50);
+    ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function drawGitHub(x, y, r) {
+  var s = r * 0.78;
+  ctx.save(); ctx.translate(x, y);
+  // Background
+  ctx.fillStyle = '#24292E';
+  ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI*2); ctx.fill();
+  // Tentacles
+  ctx.lineWidth = s*0.13; ctx.strokeStyle = '#FAFAFA';
+  ctx.lineCap = 'round'; ctx.setLineDash([]);
+  [[-s*.52,s*.50,-s*.38,s*.82,-s*.18,s*.68],
+   [-s*.24,s*.56,-s*.20,s*.86,0,s*.72],
+   [0,s*.58,s*.02,s*.88,s*.20,s*.74],
+   [s*.24,s*.56,s*.20,s*.86,s*.38,s*.68],
+   [s*.52,s*.50,s*.40,s*.80,s*.54,s*.60]
+  ].forEach(function(p) {
+    ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.quadraticCurveTo(p[2],p[3],p[4],p[5]); ctx.stroke();
+  });
+  // Body + head
+  ctx.fillStyle = '#FAFAFA';
+  ctx.beginPath(); ctx.ellipse(0, s*0.30, s*0.52, s*0.34, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -s*0.08, s*0.48, 0, Math.PI*2); ctx.fill();
+  // Ears
+  [[-s*0.37,-s*0.50],[s*0.37,-s*0.50]].forEach(function(p) {
+    ctx.beginPath();
+    ctx.moveTo(p[0]-s*0.14, p[1]+s*0.04);
+    ctx.lineTo(p[0], p[1]-s*0.20);
+    ctx.lineTo(p[0]+s*0.14, p[1]+s*0.04);
+    ctx.closePath(); ctx.fill();
+  });
+  // Eyes (dark)
+  ctx.fillStyle = '#24292E';
+  [[-s*0.20,-s*0.11],[s*0.20,-s*0.11]].forEach(function(p) {
+    ctx.beginPath(); ctx.arc(p[0],p[1],s*0.10,0,Math.PI*2); ctx.fill();
+  });
+  // Eye shine
+  ctx.fillStyle = '#FAFAFA';
+  [[-s*0.23,-s*0.14],[s*0.17,-s*0.14]].forEach(function(p) {
+    ctx.beginPath(); ctx.arc(p[0],p[1],s*0.034,0,Math.PI*2); ctx.fill();
+  });
+  // Nose
+  ctx.fillStyle = '#24292E';
+  ctx.beginPath(); ctx.arc(0, s*0.04, s*0.055, 0, Math.PI*2); ctx.fill();
+  // Inner ears (pink)
+  ctx.fillStyle = '#F48FB1';
+  [[-s*0.37,-s*0.49],[s*0.37,-s*0.49]].forEach(function(p) {
+    ctx.beginPath();
+    ctx.moveTo(p[0]-s*0.07,p[1]+s*0.02);
+    ctx.lineTo(p[0],p[1]-s*0.10);
+    ctx.lineTo(p[0]+s*0.07,p[1]+s*0.02);
+    ctx.closePath(); ctx.fill();
+  });
+  ctx.restore();
+}
+
+var TOOLS = [
+  { draw: drawPython, label: 'Python', base: 0 },
+  { draw: drawFiji,   label: 'Fiji',   base: 2*Math.PI/5 },
+  { draw: drawNapari, label: 'Napari', base: 4*Math.PI/5 },
+  { draw: drawJava,   label: 'Java',   base: 6*Math.PI/5 },
+  { draw: drawGitHub, label: 'GitHub', base: 8*Math.PI/5 },
+];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function fillCircle(x, y, r, col, a) {
+  ctx.save();
+  if (a !== undefined) ctx.globalAlpha = a;
+  ctx.fillStyle = col;
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawArrow(x1, y1, x2, y2, col, alpha) {
+  var dx = x2-x1, dy = y2-y1, d = Math.sqrt(dx*dx+dy*dy);
+  if (d < 4) return;
+  var pad = PR * 0.75;
+  var nx = dx/d, ny = dy/d;
+  var ax = x1+nx*pad, ay = y1+ny*pad;
+  var bx = x2-nx*pad, by = y2-ny*pad;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = col; ctx.lineWidth = 1.0; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+  var hs = 7, ang = Math.atan2(by-ay, bx-ax);
+  ctx.fillStyle = col;
+  ctx.beginPath();
+  ctx.moveTo(bx, by);
+  ctx.lineTo(bx - hs*Math.cos(ang-0.40), by - hs*Math.sin(ang-0.40));
+  ctx.lineTo(bx - hs*Math.cos(ang+0.40), by - hs*Math.sin(ang+0.40));
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function lighten(hex, amt) {
+  var n = parseInt(hex.slice(1), 16);
+  var r = Math.min(255, (n>>16) + amt);
+  var g = Math.min(255, ((n>>8)&0xff) + amt);
+  var b = Math.min(255, (n&0xff) + amt);
+  return 'rgb('+r+','+g+','+b+')';
+}
+
+// ─── Main draw ────────────────────────────────────────────────────────────────
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  var bg = ctx.createRadialGradient(CX,CY,0,CX,CY,Math.max(W,H)*0.8);
+  bg.addColorStop(0, '#060E22'); bg.addColorStop(1, '#03040C');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  // Stars with twinkle
+  var tt = t * 0.0003;
+  stars.forEach(function(s) {
+    var a = s.a + 0.22*Math.sin(s.ph + tt*1.4);
+    fillCircle(s.x*W, s.y*H, s.r, '#ffffff', Math.max(0.04, a));
+  });
+
+  // Orbit rings (dashed)
+  [R_TOOL, R_STEP].forEach(function(r, i) {
+    ctx.save();
+    ctx.globalAlpha = i===0 ? 0.14 : 0.10;
+    ctx.strokeStyle = '#00C8D7'; ctx.lineWidth = 0.7;
+    ctx.setLineDash([6, 9]);
+    ctx.beginPath(); ctx.arc(CX, CY, r, 0, Math.PI*2); ctx.stroke();
+    ctx.restore();
+  });
+
+  // ── Compute step planet positions ──
+  var stepPos = STEPS.map(function(s, i) {
+    var ang = (i / STEPS.length) * Math.PI*2 + angle;
+    return {
+      x: CX + R_STEP * Math.cos(ang),
+      y: CY + R_STEP * Math.sin(ang),
+      s: s, i: i
+    };
+  });
+
+  // Sequence arrows between consecutive steps
+  stepPos.forEach(function(p, i) {
+    var nxt = stepPos[(i+1) % stepPos.length];
+    var isActive = (i === activeStep) || (i === (activeStep-1+STEPS.length)%STEPS.length);
+    drawArrow(p.x, p.y, nxt.x, nxt.y, isActive ? '#00C8D7' : '#0E2A30', isActive ? 0.70 : 0.25);
+  });
+
+  // Step planet circles
+  stepPos.forEach(function(p) {
+    var i = p.i, s = p.s;
+    var x = p.x, y = p.y;
+    var active = (i === activeStep);
+    var pulse  = active ? 1 + 0.06*Math.sin(t*0.06) : 1;
+    var pr     = PR * pulse;
+
+    // Outer glow when active
+    if (active) {
+      for (var g = 4; g >= 0; g--) {
+        fillCircle(x, y, pr*(1 + g*0.52), s.glow, 0.055/(g+1));
+      }
+    }
+
+    // Planet body gradient
+    var grad = ctx.createRadialGradient(x-pr*0.25, y-pr*0.25, pr*0.05, x, y, pr);
+    grad.addColorStop(0, lighten(s.color, 45));
+    grad.addColorStop(1, s.color);
+    fillCircle(x, y, pr, grad);
+
+    // Dashed border (step 8 = non-equilibrium, special)
+    if (s.dashed) {
+      ctx.save();
+      ctx.strokeStyle = s.glow; ctx.lineWidth = 1.5;
+      ctx.globalAlpha = 0.80; ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.arc(x, y, pr+2.5, 0, Math.PI*2); ctx.stroke();
+      ctx.restore();
+    }
+
+    // Active highlight ring
+    if (active) {
+      ctx.save();
+      ctx.strokeStyle = s.glow; ctx.lineWidth = 2.2;
+      ctx.globalAlpha = 0.95; ctx.setLineDash([]);
+      ctx.beginPath(); ctx.arc(x, y, pr+5, 0, Math.PI*2); ctx.stroke();
+      ctx.restore();
+    }
+
+    // Step number (S1–S9)
+    ctx.save();
+    ctx.globalAlpha = active ? 1 : 0.70;
+    ctx.fillStyle   = active ? s.glow : 'rgba(255,255,255,.50)';
+    ctx.font        = '600 ' + (pr*0.37)+'px \'DM Mono\', monospace';
+    ctx.textAlign   = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('S'+(i+1), x, y - pr*0.18);
+    ctx.restore();
+
+    // Short label
+    ctx.save();
+    ctx.globalAlpha = active ? 0.95 : 0.50;
+    ctx.fillStyle   = active ? '#fff' : s.glow;
+    ctx.font        = '400 ' + (pr*0.26)+'px \'DM Mono\', monospace';
+    ctx.textAlign   = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(s.short, x, y + pr*0.30);
+    ctx.restore();
+  });
+
+  // ── Sun ──
+  var sp = SR * (1 + 0.022*Math.sin(t*0.038));
+  var glowCols = ['#FF6F00','#FF8F00','#FFA000','#FFB300'];
+  [4,3,2,1].forEach(function(m, i) {
+    fillCircle(CX, CY, sp*(1+m*0.52), glowCols[i], 0.038+i*0.018);
+  });
+  var sg = ctx.createRadialGradient(CX-sp*0.3, CY-sp*0.3, sp*0.05, CX, CY, sp);
+  sg.addColorStop(0,'#FFE57F'); sg.addColorStop(0.5,'#FFB300'); sg.addColorStop(1,'#E65100');
+  fillCircle(CX, CY, sp, sg);
+
+  ctx.save();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#1C0800';
+  ctx.font = '700 '+(sp*0.36)+'px \'Syne\', sans-serif';
+  ctx.fillText('KapoorLabs', CX, CY - sp*0.14);
+  ctx.font = '400 '+(sp*0.26)+'px \'DM Mono\', monospace';
+  ctx.fillStyle = '#3E1800';
+  ctx.fillText('Workflow', CX, CY + sp*0.22);
+  ctx.restore();
+
+  // ── Tool planets (inner orbit, Kepler speed) ──
+  var toolSpeed = Math.pow(R_STEP/R_TOOL, 1.5);
+  TOOLS.forEach(function(tool) {
+    var ang = tool.base + angle * toolSpeed;
+    var tx  = CX + R_TOOL * Math.cos(ang);
+    var ty  = CY + R_TOOL * Math.sin(ang);
+    var tr  = PR * 0.70;
+
+    fillCircle(tx, ty, tr*1.65, '#00C8D7', 0.06);
+    fillCircle(tx, ty, tr, '#001820', 0.95);
+
+    ctx.save();
+    ctx.strokeStyle = '#00C8D7'; ctx.lineWidth = 1.2;
+    ctx.globalAlpha = 0.35; ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(tx, ty, tr, 0, Math.PI*2); ctx.stroke();
+    ctx.restore();
+
+    // Logo clipped to circle
+    ctx.save();
+    ctx.beginPath(); ctx.arc(tx, ty, tr*0.90, 0, Math.PI*2); ctx.clip();
+    tool.draw(tx, ty, tr*0.88);
+    ctx.restore();
+
+    // Tool name label
+    ctx.save();
+    ctx.globalAlpha = 0.78;
+    ctx.fillStyle   = '#00C8D7';
+    ctx.font        = '300 '+(tr*0.38)+'px \'DM Mono\', monospace';
+    ctx.textAlign   = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText(tool.label, tx, ty + tr + 3);
+    ctx.restore();
+  });
+}
+
+// ─── Animation loop (step ring: 1 rev / 90 seconds) ──────────────────────────
+var REV_MS = 90000;
+
+function loop(ts) {
+  if (!lastTs) lastTs = ts;
+  var dt = ts - lastTs;
+  lastTs = ts;
+  t     += dt;
+  angle += (Math.PI*2) / REV_MS * dt;
+  draw();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
