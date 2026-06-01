@@ -1,0 +1,79 @@
+<button id="article-btn" onclick="document.getElementById('article-overlay').style.display='flex'"
+  style="margin-top:auto; padding:8px 14px; background:transparent; border:1px solid rgba(0,200,215,.35);
+  color:#00C8D7; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; cursor:pointer;">
+  ↗ Read Article
+</button>
+
+<div id="article-overlay" style="display:none; position:fixed; inset:0; background:#03040C;
+  z-index:100; overflow-y:auto; padding:3rem clamp(1.5rem,8vw,6rem);">
+  <button onclick="document.getElementById('article-overlay').style.display='none'"
+    style="position:sticky; top:0; float:right; background:transparent; border:none;
+    color:#00C8D7; font-family:'DM Mono',monospace; font-size:11px; cursor:pointer;
+    letter-spacing:.15em; text-transform:uppercase;">✕ Close</button>
+
+  <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.2em;
+    color:#007A85; margin-bottom:1.5rem; text-transform:uppercase;">
+    Opinion · Software Development
+  </p>
+
+  <h1 style="font-family:'Syne',sans-serif; font-size:clamp(22px,4vw,36px);
+    font-weight:800; color:#EFF6FF; line-height:1.25; margin-bottom:1.5rem;">
+    AI Is the Construction Worker.<br>You Are Still the Architect.
+  </h1>
+
+  <p style="font-family:'DM Mono',monospace; font-size:11px; color:#007A85;
+    border-top:1px solid rgba(0,200,215,.15); border-bottom:1px solid rgba(0,200,215,.15);
+    padding:.6rem 0; margin-bottom:2rem; letter-spacing:.1em;">
+    A practitioner's view on where AI-assisted coding actually belongs in a serious workflow
+  </p>
+
+  <!-- paste article paragraphs here, styled as below -->
+  <div style="font-family:'DM Mono',monospace; font-size:14px; line-height:2;
+    color:rgba(239,246,255,.70); max-width:680px;">
+
+    <p style="margin-bottom:1.4rem">There is no shortage of content about using AI for coding.
+    Yet much of it describes a style of working that feels foreign to anyone with a structured
+    approach to software development. This piece is an attempt to set that straight.</p>
+
+    <p style="color:#00C8D7; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    margin-bottom:.75rem; margin-top:2rem;">Coding is architecture first</p>
+
+    <p style="margin-bottom:1.4rem">Coding is fundamentally about structure, and about the
+    choices you make when constructing something that solves a well-defined task. Before writing
+    a line of implementation, you need a template — a cookiecutter repository that enforces the
+    blueprint of the project. From there you choose your primary classes: a
+    <code style="color:#00C8D7">pytorch_model</code>, a <code style="color:#00C8D7">dataset</code>,
+    a <code style="color:#00C8D7">trainer</code>. These are the rooms. The shared utilities in
+    <code style="color:#00C8D7">utils.py</code> are the electrical wiring.</p>
+
+    <p style="margin-bottom:1.4rem">Whether to build a class hierarchy for feed-forward and
+    recurrent models or handle the distinction with a simple boolean flag is a design decision
+    that belongs to the architect. It is not a question for AI.</p>
+
+    <p style="color:#00C8D7; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    margin-bottom:.75rem; margin-top:2rem;">What AI is actually good for</p>
+
+    <p style="margin-bottom:1.4rem">Think of AI as a skilled, tireless construction worker.
+    On command, it can produce Hydra configuration files for hyperparameter sweeps, write Slurm
+    scripts for matrix jobs, turn a day's commits into polished documentation, and generate HTML
+    to make notebook results publication-ready. It can survey the landscape of algorithms for a
+    task and write comprehensive tests for every case you have designed.</p>
+
+    <p style="border-left:2px solid #007A85; padding:.5rem 0 .5rem 1.25rem;
+    color:rgba(239,246,255,.50); font-style:italic; margin:2rem 0; font-size:15px; line-height:1.8;">
+    The right use of AI is not to critique your decisions. It is to execute them faithfully,
+    at a speed and scale you could not match alone.</p>
+
+    <p style="color:#00C8D7; font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    margin-bottom:.75rem; margin-top:2rem;">The distinction that matters</p>
+
+    <p style="margin-bottom:1.4rem">The common failure mode in AI-assisted development is
+    treating the tool as a decision-maker rather than an implementer. The moment you outsource
+    design choices to a language model, you lose the coherence that makes software maintainable.
+    Keep the design decisions where they belong, and AI becomes genuinely powerful.</p>
+
+    <p style="color:rgba(0,200,215,.45); font-size:10px; letter-spacing:.18em;
+    text-transform:uppercase; margin-top:2.5rem;">Content rating: 8.4 / 10</p>
+  </div>
+</div>
