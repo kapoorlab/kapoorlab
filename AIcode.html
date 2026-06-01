@@ -1,168 +1,148 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Is the Construction Worker — KapoorLabs</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
-
-  .article-wrap {
+  body {
+    background: #0a0a0a;
+    color: #c8c8c8;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.9;
     max-width: 680px;
-    padding: 2.5rem 0 3rem;
-    font-family: 'Lora', Georgia, serif;
-    color: var(--color-text-primary);
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
   }
 
+  a { color: #888; }
+
   .kicker {
-    font-family: 'DM Mono', monospace;
     font-size: 11px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin: 0 0 1rem;
+    color: #555;
+    margin-bottom: 2rem;
   }
 
   h1 {
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin: 0 0 1.25rem;
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 22px;
+    font-weight: bold;
+    color: #e0e0e0;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
   }
 
   .byline {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    border-top: 0.5px solid var(--color-border-tertiary);
-    border-bottom: 0.5px solid var(--color-border-tertiary);
-    padding: 0.6rem 0;
-    margin: 0 0 2rem;
+    font-size: 11px;
+    color: #555;
+    border-bottom: 1px solid #222;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
   }
 
-  .article-body p {
-    font-size: 17px;
-    line-height: 1.8;
-    margin: 0 0 1.4rem;
-    color: var(--color-text-primary);
+  h2 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #666;
+    margin: 2.5rem 0 1rem;
   }
 
-  .pull-quote {
-    border-left: 3px solid var(--color-border-secondary);
+  p {
+    margin-bottom: 1.4rem;
+    color: #b0b0b0;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    color: #e0e0e0;
+  }
+
+  blockquote {
+    border-left: 2px solid #333;
     margin: 2rem 0;
-    padding: 0.25rem 0 0.25rem 1.5rem;
+    padding: 0 0 0 1.5rem;
+    color: #888;
     font-style: italic;
-    font-size: 19px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
   }
 
-  .pull-quote span {
-    font-style: normal;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    display: block;
-    margin-top: 0.75rem;
-    color: var(--color-text-tertiary);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-text-tertiary);
-    margin: 2.5rem 0 0.75rem;
-  }
-
-  .rating-block {
+  .rating {
     margin-top: 3rem;
-    border-top: 0.5px solid var(--color-border-tertiary);
+    border-top: 1px solid #222;
     padding-top: 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
+    font-size: 12px;
+    color: #555;
   }
 
-  .rating-score {
-    font-family: 'DM Mono', monospace;
-    font-size: 48px;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--color-text-primary);
-    white-space: nowrap;
+  .rating span {
+    color: #c8c8c8;
+    font-size: 18px;
   }
 
-  .rating-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-text-tertiary);
-    margin-bottom: 0.4rem;
+  .nav {
+    font-size: 11px;
+    margin-bottom: 3rem;
+    color: #444;
   }
 
-  .rating-verdict {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    font-family: 'Lora', serif;
+  /* typewriter cursor blink on h1 */
+  h1::after {
+    content: '_';
+    animation: blink 1.1s step-end infinite;
+    color: #555;
   }
-
-  .stars {
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.5rem;
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
   }
 </style>
+</head>
+<body>
 
-<div class="article-wrap">
-  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Article: AI as construction worker, you as architect</h2>
+<div class="nav"><a href="index.html">← back</a></div>
 
-  <p class="kicker">Opinion &nbsp;&bull;&nbsp; Software Development</p>
+<div class="kicker">opinion &nbsp;/&nbsp; software development &nbsp;/&nbsp; kapoorlabs</div>
 
-  <h1>AI Is the Construction Worker. You Are Still the Architect.</h1>
+<h1>AI Is the Construction Worker.<br>You Are Still the Architect.</h1>
 
-  <div class="byline">A practitioner's view on where AI-assisted coding actually belongs in a serious workflow</div>
+<div class="byline">a practitioner's view on where AI-assisted coding actually belongs in a serious workflow &nbsp;·&nbsp; content rating: 8.4 / 10</div>
 
-  <div class="article-body">
+<p>There is no shortage of content about using AI for coding. Yet much of it describes a style of working that feels foreign to anyone with a structured approach to software development. The tutorials tend to assume a blank canvas, rarely reckoning with what it means to have a deliberate architectural philosophy already in place. This piece is an attempt to set that straight.</p>
 
-    <p class="section-label">The problem with the discourse</p>
+<h2>coding is architecture first</h2>
 
-    <p>There is no shortage of content about using AI for coding. Yet much of it describes a style of working that feels foreign to anyone with a structured approach to software development. The tutorials tend to assume a blank canvas. They rarely reckon with what it means to have a deliberate architectural philosophy already in place, and what role a tool like AI should play within it.</p>
+<p>Coding is fundamentally about structure, and about the choices you make when constructing something that solves a well-defined task. Consider building a house. Before a single brick is laid, you need a blueprint. You designate each room for a specific purpose, ensure the rooms requiring water and electrical connections actually have them, and account for drainage and utility routing from the start. That planning is coding.</p>
 
-    <p>This piece is an attempt to set that straight.</p>
+<p>Translated to software: before writing a line of implementation, you need a template. A good starting point is a cookiecutter repository that enforces the blueprint of the project. From there you choose your primary classes — a <code>pytorch_model</code>, a <code>dataset</code>, a <code>trainer</code>. These are the rooms. The shared utilities that every component relies on, housed in a <code>utils.py</code>, are the electrical wiring running through the walls.</p>
 
-    <p class="section-label">Coding is architecture first</p>
+<p>A well-formed Python project has a clear anatomy: modules inside <code>src/</code> with no runnable scripts inside them, scripts and notebooks at the top level, Hydra config files governing execution. That structure is non-negotiable, and it is yours to define. Whether to build a class hierarchy for feed-forward and recurrent models or handle the distinction with a simple boolean flag is a design decision that belongs to the architect. It is not a question for AI.</p>
 
-    <p>Coding is fundamentally about structure, and about the choices you make when constructing something that solves a well-defined task. Consider building a house. Before a single brick is laid, you need a blueprint. You designate each room for a specific purpose, you ensure that the rooms requiring water and electrical connections actually have them, you account for drainage and utility routing from the start. That planning is coding.</p>
+<blockquote>You decide the design. You are the architect of the building, and that is not a task you delegate.</blockquote>
 
-    <div class="pull-quote">
-      You decide the design. You are the architect of the building, and that is not a task you delegate.
-      <span>Core argument</span>
-    </div>
+<h2>what AI is actually good for</h2>
 
-    <p>Translated to software: before writing a line of implementation, you need a template. A good starting point is a cookiecutter repository that enforces the blueprint of the project. From there you choose your primary classes: a <code style="font-family:'DM Mono',monospace;font-size:15px;background:var(--color-background-secondary);padding:1px 6px;border-radius:4px;">pytorch_model</code>, a <code style="font-family:'DM Mono',monospace;font-size:15px;background:var(--color-background-secondary);padding:1px 6px;border-radius:4px;">dataset</code>, a <code style="font-family:'DM Mono',monospace;font-size:15px;background:var(--color-background-secondary);padding:1px 6px;border-radius:4px;">trainer</code>. These are the rooms. The shared utilities that every component relies on, housed in a <code style="font-family:'DM Mono',monospace;font-size:15px;background:var(--color-background-secondary);padding:1px 6px;border-radius:4px;">utils.py</code>, are the electrical wiring running through the walls.</p>
+<p>Given that framing, the question becomes: what remains for AI once the design decisions are yours alone? Quite a lot, provided you think of it as a skilled, tireless construction worker rather than a co-architect.</p>
 
-    <p>A well-formed Python project has a clear anatomy: modules inside <code style="font-family:'DM Mono',monospace;font-size:15px;background:var(--color-background-secondary);padding:1px 6px;border-radius:4px;">src/</code> with no runnable scripts inside them, scripts and notebooks sitting at the top level, Hydra config files governing execution. That structure is non-negotiable, and it is yours to define. Whether to build a class hierarchy for feed-forward and recurrent models or to handle the distinction with a simple boolean flag is a design decision that belongs to the architect. It is not a question for AI.</p>
+<p>On command, AI excels at generating the scaffolding your design requires. It can produce multiple Hydra configuration files covering a sweep of hyperparameters. It can write Slurm scripts for matrix jobs that would otherwise take an afternoon to assemble. It can turn a day's commits into polished documentation — well-formatted Markdown tables, reStructuredText, or HTML output. It can generate the HTML needed to make notebook results presentable and publication-ready.</p>
 
-    <p class="section-label">What AI is actually good for</p>
+<p>It is also genuinely useful as a research assistant. Asking it to survey the landscape of algorithms for a specific task — such as quantifying the shape of a three-dimensional object using computer vision — gives you a useful inventory to reason against. And it can write comprehensive tests for every case you have designed, which is where a significant portion of real productivity lives.</p>
 
-    <p>Given that framing, the question becomes: what remains for AI once the design decisions are yours alone? Quite a lot, as it turns out, provided you think of it as a skilled, tireless construction worker rather than a co-architect.</p>
+<blockquote>The right use of AI is not to critique your decisions. It is to execute them faithfully, at a speed and scale you could not match alone.</blockquote>
 
-    <p>On command, AI excels at generating the scaffolding your design requires. It can produce multiple Hydra configuration files covering a sweep of hyperparameters. It can write Slurm scripts for matrix jobs that would otherwise take an afternoon to assemble by hand. It can turn a day's worth of commits into polished documentation, complete with well-formatted Markdown tables, reStructuredText, or HTML output that you would not bother writing manually. It can generate the HTML needed to make notebook results presentable and publication-ready.</p>
+<h2>the distinction that matters</h2>
 
-    <p>It is also genuinely useful as a research assistant. Asking it to survey the landscape of algorithms for a specific task, such as quantifying the shape of a three-dimensional object using computer vision, gives you a useful inventory to reason against. And it can write comprehensive tests for every case you have designed, which is where a significant portion of real productivity lives.</p>
+<p>The common failure mode in AI-assisted development is treating the tool as a decision-maker rather than an implementer. The moment you outsource design choices to a language model, you lose the coherence that makes software maintainable. A construction worker who reroutes the plumbing without consulting the architect is not being helpful.</p>
 
-    <div class="pull-quote">
-      The right use of AI is not to critique your decisions. It is to execute them faithfully, at a speed and scale you could not match alone.
-    </div>
+<p>Keep the design decisions where they belong, and AI becomes genuinely powerful. It handles the work that is deterministic, repetitive, or mechanical, freeing you to focus on the choices that actually require judgment. That is not a diminished role for the technology. It is the correct one.</p>
 
-    <p class="section-label">The distinction that matters</p>
+<div class="rating">
+  <span>8.4</span> / 10 &nbsp;·&nbsp; strong original perspective. the construction analogy is vivid and holds up. would benefit from one concrete before-and-after example to ground the argument for readers still forming a workflow.
+</div>
 
-    <p>The common failure mode in AI-assisted development is treating the tool as a decision-maker rather than an implementer. The moment you outsource design choices to a language model, you lose the coherence that makes software maintainable. A construction worker who reroutes the plumbing without consulting the architect is not being helpful.</p>
-
-    <p>Keep the design decisions where they belong, and AI becomes genuinely powerful. It handles the work that is deterministic, repetitive, or mechanical, freeing you to focus on the choices that actually require judgment. That is not a diminished role for the technology. It is the correct one.</p>
-  </div>
-
-
+</body>
+</html>
