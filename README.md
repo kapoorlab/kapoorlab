@@ -1,6 +1,8 @@
-# kapoorlab
-# Hello! :wave: this is Dr. rer. nat. Varun Kapoor.
+# Hello! :wave: this is Dr. rer. nat. Varun Kapoor, leader of non-profit KapoorLabs.
 
+[Our policy on usage of AI based tools for coding](https://kapoorlab.github.io/kapoorlab/AIcode.html)
+
+[Our signature workflow](https://kapoorlab.github.io/kapoorlab/)
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/donate?business=varun.kapoor@kapoorlabs.org&currency_code=EUR)
