@@ -1,4 +1,4 @@
-# Hello! :wave: this is Dr. rer. nat. Varun Kapoor, leader of non-profit KapoorLabs.
+# Hello! :wave: this is Dr. rer. nat. Varun Kapoor, KapoorLabs.
 
 [Our policy on usage of AI based tools for coding](https://kapoorlab.github.io/kapoorlab/AIcode.html)
 
