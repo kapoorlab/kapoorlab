@@ -1,4 +1,4 @@
-# Hello! :wave: this is Dr. rer. nat. Varun Kapoor, KapoorLabs.
+# Hello! :wave: Dr. rer. nat. Varun Kapoor.
 
 [Our policy on usage of AI based tools for coding](https://kapoorlab.github.io/kapoorlab/AIcode.html)
 
