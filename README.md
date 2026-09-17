@@ -4,6 +4,8 @@
 
 [Our signature workflow](https://kapoorlab.github.io/kapoorlab/)
 
+[Our Electrodynamics physics course (videos) at Bachelor/Master level](https://kapoorlabs.org/electrodynamics-from-scratch/)
+
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/donate?business=varun.kapoor@kapoorlabs.org&currency_code=EUR)
 [![Entra](https://img.shields.io/badge/🤗%20HuggingFace-Entra-yellow)](https://huggingface.co/spaces/vkapoor/Entra)
