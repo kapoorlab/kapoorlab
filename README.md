@@ -5,6 +5,7 @@
 [Our signature workflow](https://kapoorlab.github.io/kapoorlab/)
 
 [Our Electrodynamics physics course (videos) at Bachelor/Master level](https://kapoorlabs.org/electrodynamics-from-scratch/)
+
 [Using Lanchain to create your own Claude Code and Chatbot with chat with pdfs capabilities](https://kapoorlabs.org/engineering-custom-ai-bots/)
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
