@@ -4,9 +4,11 @@
 
 [Our signature workflow](https://kapoorlab.github.io/kapoorlab/)
 
+[Our Bio Image Analysis tools (videos)](https://youtube.com/playlist?list=PLWwFwCbAil-E&si=q1S1G8BYu-AF8zI6)
+
 [Our Electrodynamics physics course (videos) at Bachelor/Master level](https://kapoorlabs.org/electrodynamics-from-scratch/)
 
-[Using Lanchain to create your own Claude Code and Chatbot with chat with pdfs capabilities](https://kapoorlabs.org/engineering-custom-ai-bots/)
+[Using Lanchain to create your own Claude Code and Chatbot with chat with pdfs capabilities (video tutorials)](https://kapoorlabs.org/engineering-custom-ai-bots/)
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg?logo=paypal)](https://www.paypal.com/donate?business=varun.kapoor@kapoorlabs.org&currency_code=EUR)
